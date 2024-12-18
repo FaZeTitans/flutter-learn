@@ -2,8 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
-class PostHeader extends StatelessWidget {
-  const PostHeader({super.key});
+class PostHeaderView extends StatelessWidget {
+  final String? location;
+  final String? weather;
+
+  const PostHeaderView({super.key, this.location, this.weather});
 
   @override
   Widget build(BuildContext context) {
@@ -13,17 +16,16 @@ class PostHeader extends StatelessWidget {
         children: [
           const CircleAvatar(
             radius: 20,
-            backgroundColor: Colors.red,
-            foregroundImage: AssetImage("assets/images/flutter_logo.png"),
+            foregroundImage: NetworkImage("https://placecats.com/100/100"),
           ),
           const SizedBox(width: 8),
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("John Doe"),
+              const Text("John Doe"),
               Text(
-                "2 hours ago",
-                style: TextStyle(
+                "2 hours ago${location != null ? " - $location › $weather" : ""}",
+                style: const TextStyle(
                   fontSize: 12,
                   color: Colors.grey,
                 ),
