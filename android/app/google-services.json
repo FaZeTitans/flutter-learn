@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "959094681418",
+    "project_id": "flutter-3il",
+    "storage_bucket": "flutter-3il.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959094681418:android:eee049f2adb119ac455bb3",
+        "android_client_info": {
+          "package_name": "fr.troisil.flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWpQzrgu5LQN9d2f1aZlJA7D7b6cavlik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

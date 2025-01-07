@@ -1,8 +1,6 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/model/post.dart';
-import 'package:flutter_application_1/providers/log_provider.dart';
 import 'package:flutter_application_1/services/location_service.dart';
 import 'package:flutter_application_1/services/weather_service.dart';
 

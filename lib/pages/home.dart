@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/components/post_view.dart';
 import 'package:flutter_application_1/providers/post_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -13,6 +14,26 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("MySocialLife"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              // Add logout functionality here
+              final navigator = Navigator.of(context);
+              final scaffoldMessenger = ScaffoldMessenger.of(context);
+              FirebaseAuth.instance.signOut().then((_) {
+                if (navigator.mounted) {
+                  navigator.pushReplacementNamed('/');
+                }
+              }).catchError((error) {
+                // Handle error if any
+                scaffoldMessenger.showSnackBar(
+                  SnackBar(content: Text('Logout failed: $error')),
+                );
+              });
+            },
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: postProvider.posts.length,

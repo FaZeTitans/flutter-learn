@@ -16,6 +16,9 @@ dependencies:
   http: ^0.13.3
   geolocator: ^9.0.1
   geocoding: ^2.0.0
+  firebase_core: ^3.9.0
+  firebase_auth: ^5.3.4
+  rename: ^2.0.1
 
 dev_dependencies:
   flutter_test:
