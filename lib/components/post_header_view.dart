@@ -1,6 +1,6 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import '../pages/profile.dart';
 
 class PostHeaderView extends StatelessWidget {
   final String? username;
@@ -20,10 +20,24 @@ class PostHeaderView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Row(
         children: [
-          const CircleAvatar(
-            radius: 20,
-            foregroundImage:
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfilePage(
+                    userId: "1",
+                    username: username ?? "Anonymous",
+                    profilePicture: "https://avatar.iran.liara.run/public",
+                  ),
+                ),
+              );
+            },
+            child: const CircleAvatar(
+              radius: 20,
+              foregroundImage:
                 NetworkImage("https://avatar.iran.liara.run/public"),
+            ),
           ),
           const SizedBox(width: 8),
           Column(
