@@ -3,6 +3,7 @@ import 'package:flutter_application_1/pages/new_post.dart';
 import 'package:flutter_application_1/pages/signup.dart';
 import 'package:flutter_application_1/providers/log_provider.dart';
 import 'package:flutter_application_1/providers/post_provider.dart';
+import 'package:flutter_application_1/services/chat_service.dart'; // Import ChatService
 import 'package:provider/provider.dart';
 import 'package:flutter_application_1/pages/home.dart';
 import 'package:flutter_application_1/pages/login.dart'; // Import your LoginPage
@@ -17,8 +18,9 @@ void main() async {
 
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(create: (_) => LogProvider()),
-      ChangeNotifierProvider(create: (_) => PostProvider()),
+      ChangeNotifierProvider(create: (context) => LogProvider()),
+      ChangeNotifierProvider(create: (context) => PostProvider()),
+      ChangeNotifierProvider(create: (context) => ChatService()),
     ],
     child: const MyApp(),
   ));
