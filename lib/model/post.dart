@@ -1,13 +1,13 @@
 class Post {
-  final int id;
+  final String id;
   final String content;
   final String imageUrl;
   final String username;
   final String? location;
   final DateTime? date;
   final String? weather;
-  final List<int> likes;
-  final List<int> shares;
+  final List<String> likes;
+  final List<String> shares;
   final List<Comment> comments;
 
   Post({
@@ -18,8 +18,8 @@ class Post {
     this.location,
     this.date,
     this.weather,
-    List<int>? likes,
-    List<int>? shares,
+    List<String>? likes,
+    List<String>? shares,
     List<Comment>? comments,
   })  : likes = likes ?? [],
         shares = shares ?? [],
@@ -29,9 +29,9 @@ class Post {
   int get sharesCount => shares.length;
   int get commentsCount => comments.length;
 
-  bool isLikedBy(int userId) => likes.contains(userId);
+  bool isLikedBy(String userId) => likes.contains(userId);
 
-  void toggleLike(int userId) {
+  void toggleLike(String userId) {
     if (isLikedBy(userId)) {
       likes.remove(userId);
     } else {
@@ -43,7 +43,7 @@ class Post {
     comments.add(comment);
   }
 
-  void addShare(int userId) {
+  void addShare(String userId) {
     if (!shares.contains(userId)) {
       shares.add(userId);
     }
@@ -51,23 +51,23 @@ class Post {
 }
 
 class Comment {
-  final int userId;
+  final String userId;
   final String username;
   final String content;
-  final List<int> likes;
+  final List<String> likes;
 
   Comment({
     required this.userId,
     required this.username,
     required this.content,
-    List<int>? likes,
+    List<String>? likes,
   }) : likes = likes ?? [];
 
   int get likesCount => likes.length;
 
-  bool isLikedBy(int userId) => likes.contains(userId);
+  bool isLikedBy(String userId) => likes.contains(userId);
 
-  void toggleLike(int userId) {
+  void toggleLike(String userId) {
     if (isLikedBy(userId)) {
       likes.remove(userId);
     } else {

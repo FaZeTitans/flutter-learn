@@ -19,11 +19,11 @@ class PostInteractionsView extends StatelessWidget {
         Column(
           children: [
             IconButton(
-              icon: post.isLikedBy(user.userId)
+              icon: post.isLikedBy(user.userId ?? "")
                   ? const Icon(Icons.favorite)
                   : const Icon(Icons.favorite_border),
               onPressed: () {
-                postProvider.toggleLike(post.id, user.userId);
+                postProvider.toggleLike(post.id, user.userId!);
               },
             ),
             Text("${post.likesCount}"),
@@ -37,8 +37,8 @@ class PostInteractionsView extends StatelessWidget {
                 postProvider.addComment(
                     post.id,
                     Comment(
-                        userId: user.userId,
-                        username: user.username,
+                        userId: user.userId!,
+                        username: user.username!,
                         content: "Test"));
               },
             ),
@@ -50,7 +50,7 @@ class PostInteractionsView extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.ios_share),
               onPressed: () {
-                postProvider.addShare(post.id, user.userId);
+                postProvider.addShare(post.id, user.userId!);
               },
             ),
             Text("${post.sharesCount}"),

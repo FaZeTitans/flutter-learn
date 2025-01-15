@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_application_1/providers/log_provider.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,27 +13,20 @@ class LoginPage extends StatefulWidget {
 class LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   String _errorMessage = '';
 
-  Future<void> _login() async {
+  Future<void> _login(BuildContext context) async {
+    final logProvider = Provider.of<LogProvider>(context, listen: false);
     setState(() {
       _errorMessage = '';
     });
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-      // Handle successful login here
-      debugPrint('Connecté: ${userCredential.user}');
+      await logProvider.login(_emailController.text, _passwordController.text);
 
-      // Navigate to home page
       if (mounted) {
-        Navigator.of(context).pushReplacementNamed('/home');
+        Navigator.of(context).pushNamed('/home');
       }
     } on FirebaseAuthException catch (e) {
-      // Handle login error here
       setState(() {
         _errorMessage = e.message ?? 'Erreur inconnue';
       });
@@ -73,7 +68,7 @@ class LoginPageState extends State<LoginPage> {
               ),
             const SizedBox(height: 32.0),
             ElevatedButton(
-              onPressed: _login,
+              onPressed: () => _login(context),
               child: const Text('Connexion'),
             ),
             TextButton(

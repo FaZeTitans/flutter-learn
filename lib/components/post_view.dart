@@ -13,7 +13,10 @@ class PostView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        PostHeaderView(location: post.location, weather: post.weather),
+        PostHeaderView(
+            location: post.location,
+            weather: post.weather,
+            username: post.username),
         Container(
           width: double.infinity,
           height: 300,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_application_1/providers/log_provider.dart';
+import 'package:provider/provider.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -13,33 +15,21 @@ class SignupState extends State<SignupPage> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final TextEditingController _usernameController = TextEditingController();
   String _errorMessage = '';
 
   Future<void> _signup() async {
+    final logProvider = Provider.of<LogProvider>(context, listen: false);
     setState(() {
       _errorMessage = '';
     });
 
-    if (_passwordController.text != _confirmPasswordController.text) {
-      setState(() {
-        _errorMessage = 'Les mots de passes sont différents';
-      });
-      debugPrint('Les mots de passes sont différents');
-      return;
-    }
-
     try {
-      UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-
-      debugPrint('Inscrit et connecté: ${userCredential.user}');
+      await logProvider.signup(_emailController.text, _passwordController.text,
+          _confirmPasswordController.text, _usernameController.text);
 
       if (mounted) {
-        Navigator.of(context).pushReplacementNamed('/home');
+        Navigator.of(context).pushNamed('/home');
       }
     } on FirebaseAuthException catch (e) {
       setState(() {
@@ -82,9 +72,16 @@ class SignupState extends State<SignupPage> {
                 labelText: 'Confirmation Mot de passe',
               ),
             ),
+            const SizedBox(height: 16.0),
+            TextField(
+              controller: _usernameController,
+              decoration: const InputDecoration(
+                labelText: 'Username',
+              ),
+            ),
             const SizedBox(height: 32.0),
             ElevatedButton(
-              onPressed: _signup,
+              onPressed: () => _signup(),
               child: const Text('Inscription'),
             ),
             const SizedBox(height: 16.0),

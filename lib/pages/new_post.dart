@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/providers/log_provider.dart';
 import 'package:flutter_application_1/providers/post_provider.dart';
 import 'package:provider/provider.dart';
-
 class NewPostPage extends StatelessWidget {
   const NewPostPage({super.key});
 
@@ -24,7 +23,9 @@ class NewPostPage extends StatelessWidget {
             children: [
               TextField(
                 decoration: const InputDecoration(labelText: "Image URL"),
-                onChanged: (value) {},
+                onChanged: (value) {
+                  imageUrl = value;
+                },
               ),
               TextField(
                 decoration: const InputDecoration(labelText: "Content"),
@@ -35,7 +36,8 @@ class NewPostPage extends StatelessWidget {
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
-                  postProvider.addPost(imageUrl, content, logProvider.username);
+                  postProvider.addPost(
+                      imageUrl, content, logProvider.username!);
                   Navigator.of(context).pop();
                 },
                 child: const Text("Post"),
